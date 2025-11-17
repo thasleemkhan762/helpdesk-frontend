@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CreateTicket.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://helpdesk-backend-production.up.railway.app/api';
 
 function CreateTicket() {
   const navigate = useNavigate();

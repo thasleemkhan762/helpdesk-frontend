@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Auth.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://helpdesk-backend-production.up.railway.app/api';
 
 function Register({ onLogin }) {
   const [formData, setFormData] = useState({
