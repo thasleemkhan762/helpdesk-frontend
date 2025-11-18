@@ -41,81 +41,73 @@ function Register({ onLogin }) {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2>📝 Create Account</h2>
-        <p className="auth-subtitle">Register to get started</p>
+  <div className="auth-wrapper">
 
-        {error && <div className="error-message">{error}</div>}
+      <div className="auth-left">
+        <h1>📝 Create Your Account</h1>
+        <p>
+          Join our helpdesk system to submit issues, get support faster, 
+          and collaborate with agents efficiently.
+        </p>
+      </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              required
-            />
+      <div className="auth-right">
+        <div className="auth-card">
+          <h2>Create Account</h2>
+          <p className="auth-subtitle">Register to get started</p>
+
+          {error && <div className="error-message">{error}</div>}
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Full Name</label>
+              <input name="name" value={formData.name} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+            </div>
+
+            <div className="registerdiv">
+              <div className="form-group">
+                <label>Role</label>
+                <select name="role" value={formData.role} onChange={handleChange}>
+                  <option value="user">User</option>
+                  <option value="agent">Agent</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Department</label>
+                <select name="department" value={formData.department} onChange={handleChange}>
+                  <option value="General">General</option>
+                  <option value="IT">IT</option>
+                  <option value="HR">HR</option>
+                </select>
+              </div>
+            </div>
+
+            <button className="btn-primary" disabled={loading}>
+              {loading ? "Creating account..." : "Register"}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p>Already have an account? <Link to="/login">Login here</Link></p>
           </div>
 
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Create a password"
-              required
-              minLength="6"
-            />
-          </div>
-
-         <div className="registerdiv">
-           <div className="form-group">
-            <label>Role</label>
-            <select name="role" value={formData.role} onChange={handleChange}>
-              <option value="user">User</option>
-              <option value="agent">Agent</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Department</label>
-            <select name="department" value={formData.department} onChange={handleChange}>
-              <option value="General">General</option>
-              <option value="IT">IT</option>
-              <option value="HR">HR</option>
-            </select>
-          </div>
-         </div>
-
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating account...' : 'Register'}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>Already have an account? <Link to="/login">Login here</Link></p>
         </div>
       </div>
-    </div>
-  );
+
+  </div>
+);
+
 }
 
 export default Register;
