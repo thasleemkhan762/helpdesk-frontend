@@ -284,3 +284,7 @@
     padding: 12px 16px;
   }
 }
+
+a.btn.btn-primary.btn-large {
+    width: auto;
+}
