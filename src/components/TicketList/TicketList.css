@@ -325,3 +325,7 @@
     align-items: flex-start;
   }
 }
+
+a.btn.btn-primary {
+    width: auto;
+}
