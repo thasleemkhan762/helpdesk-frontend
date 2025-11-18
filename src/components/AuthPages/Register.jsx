@@ -86,7 +86,8 @@ function Register({ onLogin }) {
             />
           </div>
 
-          <div className="form-group">
+         <div className="registerdiv">
+           <div className="form-group">
             <label>Role</label>
             <select name="role" value={formData.role} onChange={handleChange}>
               <option value="user">User</option>
@@ -102,6 +103,7 @@ function Register({ onLogin }) {
               <option value="HR">HR</option>
             </select>
           </div>
+         </div>
 
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? 'Creating account...' : 'Register'}

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import { DarkModeProvider } from './contexts/DarkModeContext';
+import './DarkMode.css';
 
 // Components
 import Login from './components/AuthPages/Login';
@@ -45,46 +47,48 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="App">
-        {user && <Navbar user={user} onLogout={handleLogout} />}
-        
-        <Routes>
-          <Route 
-            path="/login" 
-            element={!user ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} 
-          />
-          <Route 
-            path="/register" 
-            element={!user ? <Register onLogin={handleLogin} /> : <Navigate to="/dashboard" />} 
-          />
+    <DarkModeProvider>
+      <Router>
+        <div className="App">
+          {user && <Navbar user={user} onLogout={handleLogout} />}
           
-          {/* Protected Routes */}
-          <Route 
-            path="/dashboard" 
-            element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/tickets" 
-            element={user ? <TicketList user={user} /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/tickets/create" 
-            element={user ? <CreateTicket user={user} /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/tickets/:id" 
-            element={user ? <TicketDetails user={user} /> : <Navigate to="/login" />} 
-          />
-          <Route 
-            path="/admin" 
-            element={user && user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/dashboard" />} 
-          />
-          
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </div>
-    </Router>
+          <Routes>
+            <Route 
+              path="/login" 
+              element={!user ? <Login onLogin={handleLogin} /> : <Navigate to="/dashboard" />} 
+            />
+            <Route 
+              path="/register" 
+              element={!user ? <Register onLogin={handleLogin} /> : <Navigate to="/dashboard" />} 
+            />
+            
+            {/* Protected Routes */}
+            <Route 
+              path="/dashboard" 
+              element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/tickets" 
+              element={user ? <TicketList user={user} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/tickets/create" 
+              element={user ? <CreateTicket user={user} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/tickets/:id" 
+              element={user ? <TicketDetails user={user} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/admin" 
+              element={user && user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/dashboard" />} 
+            />
+            
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </div>
+      </Router>
+    </DarkModeProvider>
   );
 }
 

@@ -105,53 +105,62 @@ function TicketList({ user }) {
           </h1>
           <p>{filteredTickets.length} ticket(s) found</p>
         </div>
-        {user.role === 'user' && (
+        {/* {user.role === 'user' && (
           <Link to="/tickets/create" className="btn btn-primary">
             ➕ Create New Ticket
           </Link>
-        )}
+        )} */}
       </div>
 
       <div className="filters-section">
-        <div className="filters">
-          <select name="status" value={filters.status} onChange={handleFilterChange}>
-            <option value="">All Status</option>
-            <option value="Open">Open</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
-            <option value="Closed">Closed</option>
-          </select>
+  <div className="filters-left">
+    <select name="status" value={filters.status} onChange={handleFilterChange}>
+      <option value="">All Status</option>
+      <option value="Open">Open</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Resolved">Resolved</option>
+      <option value="Closed">Closed</option>
+    </select>
 
-          <select name="priority" value={filters.priority} onChange={handleFilterChange}>
-            <option value="">All Priorities</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Critical">Critical</option>
-          </select>
+    <select name="priority" value={filters.priority} onChange={handleFilterChange}>
+      <option value="">All Priorities</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Critical">Critical</option>
+    </select>
 
-          <select name="category" value={filters.category} onChange={handleFilterChange}>
-            <option value="">All Categories</option>
-            <option value="IT">IT</option>
-            <option value="HR">HR</option>
-            <option value="General">General</option>
-          </select>
+    <select name="category" value={filters.category} onChange={handleFilterChange}>
+      <option value="">All Categories</option>
+      <option value="IT">IT</option>
+      <option value="HR">HR</option>
+      <option value="General">General</option>
+    </select>
 
-          <button onClick={clearFilters} className="btn btn-secondary">
-            Clear Filters
-          </button>
-        </div>
-      </div>
+    <button onClick={clearFilters} className="btn btn-secondary">
+      Clear Filters
+    </button>
+  </div>
+
+  {user.role === 'user' && (
+    <div className="filters-right">
+      <Link to="/tickets/create" className="btn btn-primary">
+        ➕ Create New Ticket
+      </Link>
+    </div>
+  )}
+</div>
+
 
       {filteredTickets.length === 0 ? (
         <div className="empty-state">
           <h3>No tickets found</h3>
           <p>Try adjusting your filters or create a new ticket</p>
-          {user.role === 'user' && (
+          {/* {user.role === 'user' && (
             <Link to="/tickets/create" className="btn btn-primary">
               Create New Ticket
             </Link>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="tickets-grid">

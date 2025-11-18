@@ -1,0 +1,636 @@
+/* src/DarkMode.css - Improved Dark Mode Styles */
+
+/* ==================== CSS Variables ==================== */
+:root {
+  /* Light Mode Colors */
+  --bg-body: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --text-white: #ffffff;
+  --border-color: #e0e0e0;
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --input-bg: #ffffff;
+  --input-border: #e0e0e0;
+  --input-focus: #667eea;
+  --navbar-bg: #ffffff;
+  --table-header-bg: #f5f5f5;
+  --table-row-hover: #f9f9f9;
+}
+
+/* Dark Mode Colors - TRUE DARK! */
+body.dark-mode {
+  --bg-body: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+  --bg-primary: #1a1d2e;
+  --bg-secondary: #242938;
+  --bg-card: #1f2233;
+  --bg-card-hover: #252840;
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-white: #ffffff;
+  --border-color: #2d3144;
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.8);
+  --input-bg: #242938;
+  --input-border: #2d3144;
+  --input-focus: #667eea;
+  --navbar-bg: #1a1d2e;
+  --table-header-bg: #242938;
+  --table-row-hover: #252840;
+}
+
+/* ==================== Global Transitions ==================== */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==================== Body & Background ==================== */
+body {
+  background: var(--bg-body);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* ==================== Navbar ==================== */
+.navbar {
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-logo {
+  color: #667eea !important;
+}
+
+.navbar-link {
+  color: var(--text-primary);
+}
+
+.navbar-link:hover {
+  color: #667eea;
+}
+
+.user-name {
+  color: var(--text-primary);
+}
+
+/* ==================== Cards & Containers ==================== */
+.auth-card,
+.create-ticket-card,
+.ticket-details-card,
+.stat-card,
+.recent-tickets,
+.ticket-card,
+.filters-section,
+.kpi-card,
+.chart-card,
+.agent-performance,
+.recent-tickets-admin {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.ticket-card:hover,
+.stat-card:hover,
+.kpi-card:hover {
+  background: var(--bg-card-hover);
+  box-shadow: var(--card-shadow-hover);
+  border-color: #667eea;
+}
+
+/* ==================== Remove White Backgrounds in Dark Mode ==================== */
+body.dark-mode .empty-state,
+body.dark-mode .tickets-table,
+body.dark-mode .performance-table {
+  background: transparent;
+}
+
+/* NO WHITE backgrounds in dark mode! */
+body.dark-mode .auth-card,
+body.dark-mode .create-ticket-card,
+body.dark-mode .ticket-details-card,
+body.dark-mode .filters-section,
+body.dark-mode .recent-tickets,
+body.dark-mode .agent-performance,
+body.dark-mode .recent-tickets-admin {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* ==================== Text Colors ==================== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+p, span, label, small {
+  color: var(--text-secondary);
+}
+
+.auth-subtitle,
+.subtitle,
+.ticket-description,
+.ticket-category,
+.ticket-info {
+  color: var(--text-secondary);
+}
+
+/* Keep headers white on gradient background */
+.dashboard-header h1,
+.dashboard-header p,
+.ticket-list-header h1,
+.ticket-list-header p,
+.admin-header h1,
+.admin-header p {
+  color: var(--text-white) !important;
+}
+
+/* ==================== Inputs & Forms ==================== */
+input,
+select,
+textarea {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--input-border);
+  cursor: pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--input-focus);
+  background: var(--input-bg);
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ==================== Tables ==================== */
+.tickets-table th,
+.performance-table th {
+  background: var(--table-header-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.tickets-table td,
+.performance-table td {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.tickets-table tr:hover,
+.performance-table tr:hover {
+  background: var(--table-row-hover);
+}
+
+/* ==================== Borders ==================== */
+.ticket-header,
+.ticket-card-footer,
+.comments-section {
+  border-color: var(--border-color);
+}
+
+/* ==================== Info Sections ==================== */
+.ticket-info-grid,
+.status-actions,
+.sla-info,
+.demo-credentials {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.info-item label {
+  color: var(--text-tertiary);
+}
+
+.info-item p {
+  color: var(--text-primary);
+}
+
+/* ==================== Comments ==================== */
+.comment {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.comment-header strong {
+  color: #667eea;
+}
+
+.no-comments {
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+/* ==================== Charts ==================== */
+.chart-value {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.chart-label {
+  color: var(--text-primary);
+}
+
+/* ==================== Empty States ==================== */
+.empty-state {
+  background: transparent;
+  padding: 60px 20px;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+}
+
+/* ==================== Buttons ==================== */
+.btn {
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: #667eea;
+}
+
+.btn-logout {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-logout:hover {
+  background: #dc2626;
+}
+
+.btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+/* ==================== Dark Mode Toggle Button ==================== */
+.dark-mode-toggle {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 45px;
+  min-height: 45px;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1) rotate(20deg);
+  border-color: #667eea;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  background: var(--bg-card-hover);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ==================== Badges ==================== */
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* Priority Badges */
+.badge[style*="rgb(76, 175, 80)"] {
+  background: #10b981 !important; /* Low - Green */
+}
+
+.badge[style*="rgb(255, 152, 0)"] {
+  background: #f59e0b !important; /* Medium - Orange */
+}
+
+.badge[style*="rgb(255, 87, 34)"] {
+  background: #ef4444 !important; /* High - Red */
+}
+
+.badge[style*="rgb(244, 67, 54)"] {
+  background: #dc2626 !important; /* Critical - Dark Red */
+}
+
+/* Status Badges */
+.badge[style*="rgb(33, 150, 243)"] {
+  background: #3b82f6 !important; /* Open - Blue */
+}
+
+/* ==================== User Badge ==================== */
+.user-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.user-badge.admin {
+  background: #dc2626;
+  color: white;
+}
+
+.user-badge.agent {
+  background: #3b82f6;
+  color: white;
+}
+
+.user-badge.user {
+  background: #10b981;
+  color: white;
+}
+
+/* ==================== Error & Success Messages ==================== */
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-left: 4px solid #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.success-message {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border-left: 4px solid #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .error-message {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+}
+
+body.dark-mode .success-message {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+}
+
+/* ==================== Loading State ==================== */
+.loading {
+  color: var(--text-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ==================== Ticket ID ==================== */
+.ticket-id {
+  color: #667eea !important;
+  font-weight: 700;
+}
+
+/* ==================== Section Headers ==================== */
+.section-header h2 {
+  color: var(--text-primary);
+}
+
+/* ==================== Stats Cards Improvements ==================== */
+.stat-icon,
+.kpi-icon {
+  filter: brightness(1.2);
+}
+
+body.dark-mode .stat-icon,
+body.dark-mode .kpi-icon {
+  filter: brightness(1.5);
+}
+
+/* ==================== Improved Contrast for Dark Mode ==================== */
+body.dark-mode .ticket-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+body.dark-mode .chart-fill .count {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ==================== Form Labels ==================== */
+.form-group label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.form-group small {
+  color: var(--text-tertiary);
+}
+
+/* ==================== Smooth Transitions ==================== */
+.App,
+.navbar,
+.auth-card,
+.dashboard,
+.ticket-card,
+.ticket-details-card,
+.stat-card,
+.kpi-card,
+input,
+select,
+textarea,
+button {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.2s ease;
+}
+
+/* ==================== Scrollbar Styling for Dark Mode ==================== */
+body.dark-mode ::-webkit-scrollbar {
+  width: 12px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border: 2px solid var(--bg-primary);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #667eea;
+}
+
+/* ==================== Link Colors ==================== */
+a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #5568d3;
+}
+
+body.dark-mode a {
+  /* color: #818cf8; */
+}
+
+body.dark-mode a:hover {
+  color: #a5b4fc;
+}
+
+/* ==================== Ticket Meta Info ==================== */
+.ticket-meta,
+.ticket-sla {
+  color: var(--text-secondary);
+}
+
+.ticket-status {
+  font-weight: 600;
+}
+
+/* ==================== Comment Form ==================== */
+.comment-form textarea {
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
+  color: var(--text-primary);
+}
+
+.comment-form textarea:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ==================== Responsive Adjustments ==================== */
+@media (max-width: 768px) {
+  .dark-mode-toggle {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 6px 10px;
+    font-size: 1.1rem;
+  }
+  
+  body.dark-mode .navbar-menu {
+    gap: 10px;
+  }
+}
+
+/* ==================== Focus States ==================== */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+body.dark-mode button:focus,
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  outline-color: #818cf8;
+}
+
+/* ==================== Overdue Badge ==================== */
+.overdue-badge {
+  background: #dc2626;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ==================== Filters Section Improvements ==================== */
+.filters {
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--input-border);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.filters select:hover {
+  border-color: #667eea;
+}
+
+/* ==================== Authentication Pages ==================== */
+body.dark-mode .auth-container {
+  background: transparent;
+}
+
+.auth-card h2 {
+  color: var(--text-primary);
+}
+
+/* ==================== NO WHITE IN DARK MODE - FINAL ENFORCEMENT ==================== */
+body.dark-mode * {
+  /* Ensure no element accidentally has white background */
+}
+
+body.dark-mode .bg-white,
+body.dark-mode [style*="background: white"],
+body.dark-mode [style*="background: #fff"],
+body.dark-mode [style*="background: #ffffff"] {
+  background: var(--bg-card) !important;
+}

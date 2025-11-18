@@ -112,15 +112,22 @@ function Dashboard({ user }) {
       <div className="recent-tickets">
         <div className="section-header">
           <h2>Recent Tickets</h2>
+          {user.role === 'user' && (
+        <div className="quick-action">
+          <Link to="/tickets/create" className="btn btn-primary btn-large">
+            ➕ Create New Ticket
+          </Link>
+        </div>
+      )}
           <Link to="/tickets" className="btn btn-secondary">View All</Link>
         </div>
 
         {recentTickets.length === 0 ? (
           <div className="empty-state">
             <p>No tickets found</p>
-            {user.role === 'user' && (
+            {/* {user.role === 'user' && (
               <Link to="/tickets/create" className="btn btn-primary">Create Your First Ticket</Link>
-            )}
+            )} */}
           </div>
         ) : (
           <div className="tickets-table">
@@ -168,13 +175,13 @@ function Dashboard({ user }) {
         )}
       </div>
 
-      {user.role === 'user' && (
+      {/* {user.role === 'user' && (
         <div className="quick-action">
           <Link to="/tickets/create" className="btn btn-primary btn-large">
             ➕ Create New Ticket
           </Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
