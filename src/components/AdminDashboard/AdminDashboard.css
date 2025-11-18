@@ -203,13 +203,13 @@
 }
 
 .tickets-table th {
-  background: #f5f5f5;
+  /* background: #f5f5f5; */
   font-weight: 600;
-  color: #333;
+  /* color: #333; */
 }
 
 .tickets-table tr:hover {
-  background: #f9f9f9;
+  background: #252840;
 }
 
 .loading {
