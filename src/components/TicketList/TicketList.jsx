@@ -15,6 +15,7 @@ function TicketList({ user }) {
     priority: '',
     category: ''
   });
+  const [deleteLoading, setDeleteLoading] = useState(null);
 
   useEffect(() => {
     fetchTickets();
@@ -70,6 +71,38 @@ function TicketList({ user }) {
     });
   };
 
+  const handleDelete = async (ticketId, ticketTitle, e) => {
+    e.preventDefault(); // Prevent navigation to ticket details
+    e.stopPropagation(); // Stop event bubbling
+
+    // Confirm before deleting
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete ticket "${ticketTitle}"?\n\nThis action cannot be undone.`
+    );
+
+    if (!confirmDelete) return;
+
+    setDeleteLoading(ticketId);
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`${API_URL}/tickets/${ticketId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Remove ticket from state
+      setTickets(tickets.filter(t => t._id !== ticketId));
+      setFilteredTickets(filteredTickets.filter(t => t._id !== ticketId));
+      
+      alert('Ticket deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting ticket:', error);
+      alert('Failed to delete ticket. ' + (error.response?.data?.error || 'Please try again.'));
+    } finally {
+      setDeleteLoading(null);
+    }
+  };
+
   const getPriorityColor = (priority) => {
     const colors = {
       'Low': '#4caf50',
@@ -105,62 +138,53 @@ function TicketList({ user }) {
           </h1>
           <p>{filteredTickets.length} ticket(s) found</p>
         </div>
-        {/* {user.role === 'user' && (
+        {user.role === 'user' && (
           <Link to="/tickets/create" className="btn btn-primary">
             ➕ Create New Ticket
           </Link>
-        )} */}
+        )}
       </div>
 
       <div className="filters-section">
-  <div className="filters-left">
-    <select name="status" value={filters.status} onChange={handleFilterChange}>
-      <option value="">All Status</option>
-      <option value="Open">Open</option>
-      <option value="In Progress">In Progress</option>
-      <option value="Resolved">Resolved</option>
-      <option value="Closed">Closed</option>
-    </select>
+        <div className="filters">
+          <select name="status" value={filters.status} onChange={handleFilterChange}>
+            <option value="">All Status</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
 
-    <select name="priority" value={filters.priority} onChange={handleFilterChange}>
-      <option value="">All Priorities</option>
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
-      <option value="Critical">Critical</option>
-    </select>
+          <select name="priority" value={filters.priority} onChange={handleFilterChange}>
+            <option value="">All Priorities</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
 
-    <select name="category" value={filters.category} onChange={handleFilterChange}>
-      <option value="">All Categories</option>
-      <option value="IT">IT</option>
-      <option value="HR">HR</option>
-      <option value="General">General</option>
-    </select>
+          <select name="category" value={filters.category} onChange={handleFilterChange}>
+            <option value="">All Categories</option>
+            <option value="IT">IT</option>
+            <option value="HR">HR</option>
+            <option value="General">General</option>
+          </select>
 
-    <button onClick={clearFilters} className="btn btn-secondary">
-      Clear Filters
-    </button>
-  </div>
-
-  {user.role === 'user' && (
-    <div className="filters-right">
-      <Link to="/tickets/create" className="btn btn-primary">
-        ➕ Create New Ticket
-      </Link>
-    </div>
-  )}
-</div>
-
+          <button onClick={clearFilters} className="btn btn-secondary">
+            Clear Filters
+          </button>
+        </div>
+      </div>
 
       {filteredTickets.length === 0 ? (
         <div className="empty-state">
           <h3>No tickets found</h3>
           <p>Try adjusting your filters or create a new ticket</p>
-          {/* {user.role === 'user' && (
+          {user.role === 'user' && (
             <Link to="/tickets/create" className="btn btn-primary">
               Create New Ticket
             </Link>
-          )} */}
+          )}
         </div>
       ) : (
         <div className="tickets-grid">
@@ -168,12 +192,24 @@ function TicketList({ user }) {
             <Link to={`/tickets/${ticket._id}`} key={ticket._id} className="ticket-card">
               <div className="ticket-card-header">
                 <span className="ticket-id">{ticket.ticketId}</span>
-                <span 
-                  className="badge" 
-                  style={{ backgroundColor: getPriorityColor(ticket.priority) }}
-                >
-                  {ticket.priority}
-                </span>
+                <div className="ticket-card-badges">
+                  <span 
+                    className="badge" 
+                    style={{ backgroundColor: getPriorityColor(ticket.priority) }}
+                  >
+                    {ticket.priority}
+                  </span>
+                  {user.role === 'admin' && (
+                    <button
+                      onClick={(e) => handleDelete(ticket._id, ticket.title, e)}
+                      className="delete-btn"
+                      disabled={deleteLoading === ticket._id}
+                      title="Delete ticket"
+                    >
+                      {deleteLoading === ticket._id ? '⏳' : '🗑️'}
+                    </button>
+                  )}
+                </div>
               </div>
 
               <h3 className="ticket-title">{ticket.title}</h3>
