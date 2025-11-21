@@ -66,7 +66,7 @@ function Navbar({ user, onLogout }) {
             className={`navbar-link ${isActive('/tickets') ? 'active' : ''}`}
             onClick={() => setMenuOpen(false)}
           >
-            My Tickets
+            {user.role === 'admin' ? 'All Tickets' : 'My Tickets'}
           </Link>
 
           {user.role === 'user' && (
